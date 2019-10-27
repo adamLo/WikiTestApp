@@ -95,19 +95,55 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         }
         else {
             
-            addNewLocation()
+            queryAddNewLocation()
         }
     }
     
     // MARK: - Data handling
     
-    private func addNewLocation() {
+    private func queryAddNewLocation() {
         
-        let alert = UIAlertController(title: "Add new location", message: "Enter coordinates as latitude, longitude - separated by comma", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add new location", message: "Enter coordinates as\nlatitude, longitude\nseparated by comma", preferredStyle: .alert)
+        
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Latitude, Longitude"
+        }
+        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
             
+            if let textField = alert.textFields?.first, let text = textField.text {
+                
+                let components = text.split(separator: ",")
+                if components.count == 2 {
+                    
+                    let latitudeString = components[0]
+                    let longitudeString = components[1]
+                    if let latitude = Double(latitudeString), let longitude = Double(longitudeString) {
+                        
+                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        if CLLocationCoordinate2DIsValid(coordinate) {
+                            let location = CustomLocation(title: "Custom location", coordinate: coordinate)
+                            self.add(location: location)
+                        }
+                        else {
+                            self.showError("Please enter valid coordinates")
+                        }
+                    }
+                    else {
+                        self.showError("Please enter valid coordinates (numbers)")
+                    }
+                }
+                else {
+                    self.showError("Please enter coordinates separated by comma")
+                }
+            }
+            else {
+                self.showError("Please enter coordinates")
+            }
         }))
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         present(alert, animated: true, completion: nil)
     }
     
@@ -121,9 +157,25 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         }
         else {
             
-            let alert = UIAlertController(title: "Error", message: "Cannot open Wikipedia App!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            showError("Cannot open Wikipedia App!")
         }
+    }
+    
+    private func add(location: CustomLocation) {
+        
+        locations.append(location)
+        
+        locationsTableView.beginUpdates()
+        locationsTableView.insertRows(at: [IndexPath(row: locations.count - 1, section: 0)], with: .automatic)
+        locationsTableView.endUpdates()
+    }
+    
+    // MARK: - Error handling
+    
+    private func showError(_ message: String) {
+        
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
