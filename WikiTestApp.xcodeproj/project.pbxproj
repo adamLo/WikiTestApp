@@ -13,6 +13,10 @@
 		190F30A12365D1FE0058165B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190F309F2365D1FE0058165B /* LaunchScreen.storyboard */; };
 		190F30AC2365D1FE0058165B /* WikiTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F30AB2365D1FE0058165B /* WikiTestAppTests.swift */; };
 		190F30B82365D2D10058165B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190F30B72365D2D10058165B /* Main.storyboard */; };
+		190F30BA2365DAC20058165B /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F30B92365DAC20058165B /* LocationsViewController.swift */; };
+		190F30BD2365DB220058165B /* CustomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F30BC2365DB220058165B /* CustomLocation.swift */; };
+		190F30ED2365E04A0058165B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F30EC2365E04A0058165B /* SceneDelegate.swift */; };
+		190F30F02365E1230058165B /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190F30EF2365E1230058165B /* LocationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		190F30AB2365D1FE0058165B /* WikiTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiTestAppTests.swift; sourceTree = "<group>"; };
 		190F30AD2365D1FE0058165B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		190F30B72365D2D10058165B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		190F30B92365DAC20058165B /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
+		190F30BC2365DB220058165B /* CustomLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocation.swift; sourceTree = "<group>"; };
+		190F30EC2365E04A0058165B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		190F30EF2365E1230058165B /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,7 @@
 		190F30932365D1F70058165B /* WikiTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				190F30BB2365DB0A0058165B /* Data Model */,
 				190F30B62365D2C00058165B /* UI */,
 				190F30942365D1F70058165B /* AppDelegate.swift */,
 				190F309A2365D1FE0058165B /* Assets.xcassets */,
@@ -107,9 +116,28 @@
 		190F30B62365D2C00058165B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				190F30EE2365E1000058165B /* Locations */,
 				190F30B72365D2D10058165B /* Main.storyboard */,
+				190F30EC2365E04A0058165B /* SceneDelegate.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		190F30BB2365DB0A0058165B /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				190F30BC2365DB220058165B /* CustomLocation.swift */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		190F30EE2365E1000058165B /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				190F30B92365DAC20058165B /* LocationsViewController.swift */,
+				190F30EF2365E1230058165B /* LocationCell.swift */,
+			);
+			name = Locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +243,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				190F30952365D1F70058165B /* AppDelegate.swift in Sources */,
+				190F30F02365E1230058165B /* LocationCell.swift in Sources */,
+				190F30BA2365DAC20058165B /* LocationsViewController.swift in Sources */,
+				190F30BD2365DB220058165B /* CustomLocation.swift in Sources */,
+				190F30ED2365E04A0058165B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +410,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hu.lovastyik.WikiTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -398,7 +430,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hu.lovastyik.WikiTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
