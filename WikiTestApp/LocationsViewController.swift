@@ -33,7 +33,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func setupUI() {
         
-        title = "Wikipedia Locations Test"
+        title = NSLocalizedString("Wikipedia Locations Test", comment: "Main controller navigation title")
         
         setupTableView()
     }
@@ -80,7 +80,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: "addLocation")
-        cell.textLabel?.text = "Add new location"
+        cell.textLabel?.text = NSLocalizedString("Add new location", comment: "Add new location title")
         return cell
     }
     
@@ -103,23 +103,23 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func queryAddNewLocation() {
         
-        let alert = UIAlertController(title: "Add new location", message: "Enter coordinates as\nlatitude, longitude\nseparated by comma", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Add new location", comment: "Add new location title"), message: NSLocalizedString("Enter coordinates as\nlatitude, longitude\nseparated by comma", comment: "Add new locaton alert dialog message"), preferredStyle: .alert)
         
         alert.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Latitude, Longitude"
+            textField.placeholder = NSLocalizedString("Latitude, Longitude", comment: "Coordinates text field placeholder")
         }
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK Button title"), style: .default, handler: { (_) in
             
             if let textField = alert.textFields?.first, let text = textField.text, let location = CustomLocation(coordinates: text) {
                 self.add(location: location)
             }
             else {
-                self.showError("Please enter valid coordinates")
+                self.showError(NSLocalizedString("Please enter valid coordinates", comment: "Error message when entered text does not contain valid coordinates"))
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button title"), style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
     }
@@ -130,7 +130,7 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
         else {            
-            showError("Cannot open Wikipedia App!")
+            showError(NSLocalizedString("Cannot open Wikipedia App!", comment: "Error message when cannot create URL form location or cannot open Wikipedia app"))
         }
     }
     
@@ -147,8 +147,8 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func showError(_ message: String) {
         
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Error dialog title"), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK Button title"), style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }

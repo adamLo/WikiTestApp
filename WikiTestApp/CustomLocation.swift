@@ -35,7 +35,7 @@ struct CustomLocation {
                 
         // Yup, everything looks good
         coordinate = _coordinate
-        title = "Custom location"
+        title = NSLocalizedString("Custom location", comment: "Custom location title when initialized with a pair of coordinates")
     }
     
     /// Initializes a custom location with title and coorinate
