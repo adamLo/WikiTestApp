@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Cell prototype to displayb a custom location structure
 class LocationCell: UITableViewCell {
 
     @IBOutlet weak var locationTitleLabel: UILabel!

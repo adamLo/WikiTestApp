@@ -111,34 +111,11 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
             
-            if let textField = alert.textFields?.first, let text = textField.text {
-                
-                let components = text.split(separator: ",")
-                if components.count == 2 {
-                    
-                    let latitudeString = components[0]
-                    let longitudeString = components[1]
-                    if let latitude = Double(latitudeString), let longitude = Double(longitudeString) {
-                        
-                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        if CLLocationCoordinate2DIsValid(coordinate) {
-                            let location = CustomLocation(title: "Custom location", coordinate: coordinate)
-                            self.add(location: location)
-                        }
-                        else {
-                            self.showError("Please enter valid coordinates")
-                        }
-                    }
-                    else {
-                        self.showError("Please enter valid coordinates (numbers)")
-                    }
-                }
-                else {
-                    self.showError("Please enter coordinates separated by comma")
-                }
+            if let textField = alert.textFields?.first, let text = textField.text, let location = CustomLocation(coordinates: text) {
+                self.add(location: location)
             }
             else {
-                self.showError("Please enter coordinates")
+                self.showError("Please enter valid coordinates")
             }
         }))
         
@@ -149,14 +126,10 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
     
     private func openWikiPedia(with location: CustomLocation) {
         
-        let url = URL(string: "wikipedia://places?LACoordinate=\(location.coordinate.latitude),\(location.coordinate.longitude)")!
-        
-        if UIApplication.shared.canOpenURL(url) {
-            
+        if let url = location.wikiURL, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-        else {
-            
+        else {            
             showError("Cannot open Wikipedia App!")
         }
     }
