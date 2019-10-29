@@ -25,8 +25,8 @@ struct CustomLocation {
         guard let components = coordinates?.split(separator: ","), components.count == 2 else {return nil}
             
         // Check if componets are valid numbers
-        let latitudeString = components[0]
-        let longitudeString = components[1]
+        let latitudeString = components[0].trimmingCharacters(in: .whitespacesAndNewlines)
+        let longitudeString = components[1].trimmingCharacters(in: .whitespacesAndNewlines)
         guard let latitude = Double(latitudeString), let longitude = Double(longitudeString) else {return nil}
         
         // Check if coordinates are valid at all

@@ -71,6 +71,14 @@ class WikiTestAppTests: XCTestCase {
         XCTAssertNil(location)
     }
     
+    func testCustomLocationInitWithWithSpaces() {
+        
+        let location = CustomLocation(coordinates: " 12 , 34  ")
+        XCTAssertNotNil(location)
+        XCTAssertEqual(location?.coordinate.latitude, 12)
+        XCTAssertEqual(location?.coordinate.longitude, 34)
+    }
+    
     // MARK: - Test URL construction
     
     func testURLConstruction() {
