@@ -99,6 +99,29 @@ class LocationsViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return indexPath.row < locations.count
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if indexPath.row < locations.count {
+            return UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Delete action title"), handler: { (action, view, handler) in
+                
+                self.locations.remove(at: indexPath.row)
+                
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.endUpdates()
+                
+                handler(true)
+            })])
+        }
+        
+        return nil
+    }
+    
     // MARK: - Data handling
     
     private func queryAddNewLocation() {
